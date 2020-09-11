@@ -7,7 +7,7 @@ pipelines:
   pullRequest:
     build:
       steps:
-      - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+      - sh: echo "logging started bhai-nagender..."
         name: log-nagender
       - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
         name: npmrc
