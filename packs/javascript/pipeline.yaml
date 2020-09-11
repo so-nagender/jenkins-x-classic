@@ -8,6 +8,8 @@ pipelines:
     build:
       steps:
       - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+        name: log-nagender
+      - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
         name: npmrc
       - sh: npm install
         name: npm-install
