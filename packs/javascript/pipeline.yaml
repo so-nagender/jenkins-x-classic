@@ -4,6 +4,9 @@ agent:
 pipelines:
   pullRequest:
     build:
+      environment:
+        - name: NAGI
+          value: "kubernetes"
       steps:
       - sh: echo "logging started bhai-nagender..."
         name: log-nagender
