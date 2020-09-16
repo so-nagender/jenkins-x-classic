@@ -1,8 +1,6 @@
-extends:
-  file: ../eval-tag-pipeline.yaml
 agent:
   label: jenkins-nodejs
-  container: nodejs
+  image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
 pipelines:
   pullRequest:
     build:
