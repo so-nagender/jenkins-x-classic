@@ -1,0 +1,9 @@
+pipelines:
+  pullRequest:
+    preBuild:
+      steps:
+      - sh: echo "before build step"
+  release:
+    preBuild:
+      steps:
+      - sh: echo "BEFORE BASE SETUP ddddddddd"

@@ -1,3 +1,5 @@
+extends:
+  file: ../eval-tag-pipeline.yaml
 agent:
   label: jenkins-nodejs
   container: nodejs
