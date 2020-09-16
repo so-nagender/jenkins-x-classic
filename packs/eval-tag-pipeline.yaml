@@ -2,12 +2,11 @@ pipelines:
   pullRequest:
     preBuild:
       steps:
-      - name: check-story-branch
         - command: |
-            echo hello world
-            ls -la
+              echo hello world
+              ls -la
       - name: check-normal-step
-        step: echo normal step
+        sh: echo normal step
 #      - sh: $PULL_BASE_REF == master && branchName.replace("team/","")
 #        name: check-story-branch
 #      - sh: $PULL_BASE_REF == qa && branchName.replace("team/","")
