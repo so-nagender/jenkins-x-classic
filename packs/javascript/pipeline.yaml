@@ -1,10 +1,18 @@
 agent:
   label: jenkins-nodejs
-  image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
-  imagePullSecrets:
-  - name: jenkins-x-docker-registry-secret
+  image: "jx/sonf-js:v12-latest"
 pipelines:
   pullRequest:
+    options:
+      containerOptions:
+        env:
+        - name: DOCKER_CONFIG
+          value: /home/jenkins/.docker/
+        - name: DOCKER_REGISTRY
+          valueFrom:
+            configMapKeyRef:
+              key: docker.registry
+              name: jenkins-x-docker-registry
     build:
       steps:
       - sh: echo "logging started bhai-nagender..."
