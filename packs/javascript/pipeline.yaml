@@ -1,35 +1,39 @@
-agent:
-  label: jenkins-nodejs
-  image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
-pipelines:
-  pullRequest:
-    build:
-      steps:
-      env:
-        - name: DOCKER_CONFIG
-          value: /home/jenkins/.docker/
-      - sh: echo "logging started bhai-nagender..."
-        name: log-nagender
-      - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-        name: npmrc
-      - sh: npm install
-        name: npm-install
-      - sh: CI=true DISPLAY=:99 npm test
-        name: npm-test
-  release:
-    setVersion:
-      steps:
-      - sh: echo \$(jx-release-version) > VERSION
-        name: next-version
-        comment: so we can retrieve the version in later steps
-      # TODO modify package.json?
-      - sh: jx step tag --version \$(cat VERSION)
-        name: tag-version
-    build:
-      steps:
-      - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
-        name: npmrc
-      - sh: npm install
-        name: npm-install
-      - sh: CI=true DISPLAY=:99 npm test
-        name: npm-test
+pipelineConfig:
+  env:
+    - name: DOCKER_NAME
+      value: "hello"
+  agent:
+    label: jenkins-nodejs
+    image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
+  pipelines:
+    pullRequest:
+      build:
+        steps:
+        env:
+          - name: DOCKER_CONFIG
+            value: /home/jenkins/.docker/
+        - sh: echo "logging started bhai-nagender..."
+          name: log-nagender
+        - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+          name: npmrc
+        - sh: npm install
+          name: npm-install
+        - sh: CI=true DISPLAY=:99 npm test
+          name: npm-test
+    release:
+      setVersion:
+        steps:
+        - sh: echo \$(jx-release-version) > VERSION
+          name: next-version
+          comment: so we can retrieve the version in later steps
+        # TODO modify package.json?
+        - sh: jx step tag --version \$(cat VERSION)
+          name: tag-version
+      build:
+        steps:
+        - sh: jx step credential -s npm-token -k file -f /builder/home/.npmrc --optional=true
+          name: npmrc
+        - sh: npm install
+          name: npm-install
+        - sh: CI=true DISPLAY=:99 npm test
+          name: npm-test
