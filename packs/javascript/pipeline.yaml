@@ -1,6 +1,6 @@
 agent:
   label: jenkins-nodejs
-  image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
+  image: "dockeronce.azurecr.io/cloudbees/nodejs:12v-latest"
 pipelines:
   pullRequest:
     build:
