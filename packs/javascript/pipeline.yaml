@@ -1,7 +1,8 @@
 agent:
   label: jenkins-nodejs
   image: "dockeronce.azurecr.io/jx/sonf-js:v12-latest"
-  imagePullSecrets: jenkins-x-docker-registry-secret
+  imagePullSecrets:
+  - name: jenkins-x-docker-registry-secret
 pipelines:
   pullRequest:
     build:
