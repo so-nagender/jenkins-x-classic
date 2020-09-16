@@ -2,13 +2,13 @@ pipelines:
   pullRequest:
     preBuild:
       steps:
+      - name: check-story-branch
         script: |
           ls -la
           echo tada
           for d in 1 2 3 4; do
             echo "d is ${d}";
           done
-        name: check-story-branch
 #      - sh: $PULL_BASE_REF ==~ /team\/.*/ && branchName.replace("team/","")
 #        name: check-story-branch
 #      - sh: $PULL_BASE_REF == master && branchName.replace("team/","")
